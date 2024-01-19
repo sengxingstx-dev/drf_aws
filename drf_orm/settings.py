@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True').capitalize() == 'True'
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
@@ -141,9 +141,9 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440  # 2.5 MB (change as needed)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # S3 Configuration
-USE_S3 = os.getenv('USE_S3', 'True').capitalize() == 'True'
+AWS_S3 = os.getenv('AWS_S3', 'True').lower() == 'true'
 
-if USE_S3:
+if AWS_S3:
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')

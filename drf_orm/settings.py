@@ -130,7 +130,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # MEDIA_ROOT: This is the directory where user uploaded media files will be saved.
-MEDIA_URL = '/mediafiles/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440  # 2.5 MB (change as needed)
@@ -154,12 +154,12 @@ if USE_S3:
     AWS_DEFAULT_ACL = None
     AWS_S3_VERITY = True
     AWS_QUERYSTRING_AUTH = False
-    # STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/static/'
+    STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/static/'
+    STATICFILES_STORAGE = 'drf_orm.s3_storages.StaticStorage'
     # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    # STATICFILES_STORAGE = 'drf_orm.s3_storages.StaticStorage'
     MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/media/'
-    # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'drf_orm.s3_storages.MediaStorage'
+    # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 else:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
